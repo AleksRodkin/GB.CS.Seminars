@@ -41,7 +41,7 @@ int[] NewArray(int Length)
 
   for(int i = 0; i < Length; i++)
   {
-    array[i] = new Random().Next(1, 100);;
+    array[i] = new Random().Next(1, 100);
   }
   return array;
 }
@@ -49,7 +49,7 @@ int[] NewArray(int Length)
 void PrintArray(int[] array)
 {
   Console.Write("[");
-  for (int i = 0; i < array.Length; i++)
+  for (int i = 0; i < array.Length - 1; i++)
   {
     Console.Write(array[i] + ", ");
   }
