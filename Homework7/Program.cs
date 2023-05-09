@@ -100,35 +100,43 @@ Thread.Sleep(3000);
 
 // Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 
-double[] Create2RandomArrays(int rows, int columns, int minValue, int maxValue)
+int[,] CreateNewRandom2dArray(int rows, int columns, int minValue, int maxValue)
 {
 	int[,] array = new int[rows, columns];
-  double[] sum = new double[columns];
 	
-  for(int i = 0; i < rows; i++)
-  {
-    for(int j = 0; j < columns; j++)
-      {
-        array[i,j] = new Random().Next(minValue, maxValue + 1);
-        sum[j] = sum[j] + array[i,j]; 
-      }
-  }
+	for(int i = 0; i < rows; i++)
+		for(int j = 0; j < columns; j++)
+			array[i,j] = new Random().Next(minValue, maxValue + 1);
+	
+	return array;
+}
+
+double[] FindColumnAverage(int[,] array)
+{
+  double[] sum = new double[array.GetLength(1)];
+
+  for(int i = 0; i < array.GetLength(0); i++)
+    for(int j = 0; j < array.GetLength(1); j++)
+        sum[j] = sum[j] + array[i,j];
   
   for (int i = 0; i < sum.Length; i++)
   {
-    sum[i] /= rows;
+    sum[i] /= array.GetLength(0);
     sum[i] = Math.Round(sum[i], 2);
   }
-    
-	Console.WriteLine($"Двумерный массив целых чисел размером {rows}x{columns}: ");
+
+  return sum;
+}
+
+void Print2dArray(int[,] array)
+{
 	for(int i = 0; i < array.GetLength(0); i++)
 	{
-    for(int j = 0; j < array.GetLength(1); j++)
+		for(int j = 0; j < array.GetLength(1); j++)
 			Console.Write(array[i,j] + " ");
 		Console.WriteLine();
 	}
-
-	return sum;
+	Console.WriteLine();
 }
 
 void PrintArray(double[] array)
@@ -156,68 +164,13 @@ int nextArrayMin = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите максимальное значение элементов массива: ");
 int nextArrayMax = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine();
-double[] nextArray = Create2RandomArrays(nextArrayRows, nextArrayColumns, nextArrayMin, nextArrayMax);
+int[,] nextArray = CreateNewRandom2dArray(nextArrayRows, nextArrayColumns, nextArrayMin, nextArrayMax);
+Print2dArray(nextArray);
 Thread.Sleep(2000);
-Console.WriteLine();
 Console.WriteLine("Массив средних арифметических каждого столбца: ");
-PrintArray(nextArray);
+double[] avgArray = FindColumnAverage(nextArray);
+PrintArray(avgArray);
 Console.WriteLine("******************************************************");
 Console.WriteLine();
-Thread.Sleep(3000);
-Console.Write("Г");
-Thread.Sleep(100);
-Console.Write("о");
-Thread.Sleep(100);
-Console.Write("с");
-Thread.Sleep(100);
-Console.Write("п");
-Thread.Sleep(100);
-Console.Write("о");
-Thread.Sleep(100);
-Console.Write("д");
-Thread.Sleep(100);
-Console.Write("и");
-Thread.Sleep(100);
-Console.Write(" ");
-Thread.Sleep(100);
-Console.Write("И");
-Thread.Sleep(100);
-Console.Write("и");
-Thread.Sleep(100);
-Console.Write("с");
-Thread.Sleep(100);
-Console.Write("у");
-Thread.Sleep(100);
-Console.Write("с");
-Thread.Sleep(100);
-Console.Write("е");
-Thread.Sleep(100);
-Console.Write(",");
-Thread.Sleep(500);
-Console.Write(" ");
-Thread.Sleep(100);
-Console.Write("н");
-Thread.Sleep(100);
-Console.Write("у");
-Thread.Sleep(100);
-Console.Write(" ");
-Thread.Sleep(100);
-Console.Write("в");
-Thread.Sleep(100);
-Console.Write("о");
-Thread.Sleep(100);
-Console.Write("т");
-Thread.Sleep(100);
-Console.Write(" ");
-Thread.Sleep(100);
-Console.Write("и");
-Thread.Sleep(100);
-Console.Write(" ");
-Thread.Sleep(100);
-Console.Write("в");
-Thread.Sleep(100);
-Console.Write("с");
-Thread.Sleep(100);
-Console.WriteLine("ё");
-Thread.Sleep(700);
+Console.WriteLine("*** Ну вот и всё, ребята! ***");
 Console.WriteLine();
