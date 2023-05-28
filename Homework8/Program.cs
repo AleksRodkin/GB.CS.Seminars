@@ -14,7 +14,7 @@ void Show2dArray(int[,] array)
   for (int i = 0; i < array.GetLength(0); i++)
   {
     for (int j = 0; j < array.GetLength(1); j++)
-      Console.Write(array[i, j] + " ");
+      Console.Write(array[i, j].ToString("00") + " ");
     Console.WriteLine();
   }
   Console.WriteLine();
@@ -47,9 +47,9 @@ void PrintArray(int[] array)
 // {
 //   if (array[startIndex] < array[endIndex])
 //   {
-//     var temp = array[startIndex];
+//     var count = array[startIndex];
 //     array[startIndex] = array[endIndex];
-//     array[endIndex] = temp;
+//     array[endIndex] = count;
 //   }
 
 //   if (endIndex - startIndex > 1)
@@ -167,27 +167,27 @@ void PrintArray(int[] array)
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
 
-int[,,] new3dArray = {{ {14, 45, 32}, { 54, 15, 42}, { 25, 63, 43 }},
-                    	{ {19, 84, 66}, { 95, 46, 21}, { 31, 12, 88 }},
-                    	{ {17, 27, 33}, { 64, 62, 44}, { 76, 47, 29 }}};
+// int[,,] new3dArray = {{ {14, 45, 32}, { 54, 15, 42}, { 25, 63, 43 }},
+//                     	{ {19, 84, 66}, { 95, 46, 21}, { 31, 12, 88 }},
+//                     	{ {17, 27, 33}, { 64, 62, 44}, { 76, 47, 29 }}};
 
-void Show3dArray(int[,,] array)
-{
-  for (int k = 0; k < array.GetLength(2); k++)
-  {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-      for (int j = 0; j < array.GetLength(1); j++)
-      {
-        Console.Write(array[i, j, k] + $"({i},{j},{k}) ");
-      }
-			Console.WriteLine();
-    }
-		Console.WriteLine();
-  }
-}
+// void Show3dArray(int[,,] array)
+// {
+//   for (int k = 0; k < array.GetLength(2); k++)
+//   {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//       for (int j = 0; j < array.GetLength(1); j++)
+//       {
+//         Console.Write(array[i, j, k] + $"({i},{j},{k}) ");
+//       }
+// 			Console.WriteLine();
+//     }
+// 		Console.WriteLine();
+//   }
+// }
 
-Show3dArray(new3dArray);
+// Show3dArray(new3dArray);
 
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
@@ -196,3 +196,38 @@ Show3dArray(new3dArray);
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+
+int[,] SpiralArray(int size)
+{
+  int[,] array = new int[size, size];
+
+  int i = 0;
+  int j = 0;
+  int count = 1;
+
+  while (count <= array.GetLength(0) * array.GetLength(1))
+  {
+		array[i, j] = count;
+		count++;
+    if (i <= j + 1 && i + j < array.GetLength(1) - 1)
+    {
+      j++;
+    }
+    else if (i < j && i + j >= array.GetLength(0) - 1)
+    {
+      i++;
+    }
+    else if (i >= j && i + j > array.GetLength(1) - 1)
+    {
+      j--;
+    }
+    else if (i > j + 1 && i + j <= array.GetLength(0) - 1)
+    {
+      i--;
+    }
+  }
+	return array;
+}
+
+int[,] spArray = SpiralArray(5);
+Show2dArray(spArray);
