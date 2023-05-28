@@ -20,6 +20,17 @@ void Show2dArray(int[,] array)
 	Console.WriteLine();
 }
 
+void PrintArray(int[] array)
+{
+  Console.Write("[");
+  for (int i = 0; i < array.Length - 1; i++)
+  {
+    Console.Write(array[i] + ", ");
+  }
+  Console.Write(array[array.Length - 1]);
+  Console.WriteLine("]");
+}
+
 // Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 
 void PrintArrayNoSquareBrackets(int[] array)
@@ -75,19 +86,49 @@ SortAndPrint2dArrayRows(myArray);
 
 
 
+
 // Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 
-// Например, задан массив:
+int[] FindSumInRows(int[,] array)
+{
+	  int[] sumArray = new int[array.GetLength(0)];
 
-// 1 4 7 2
+  for (int i = 0; i < array.GetLength(0); i++)
+    for (int j = 0; j < array.GetLength(1); j++)
+		{
+			sumArray[i] += array[i,j];	
+		}
 
-// 5 9 2 3
+	return sumArray;
+}
 
-// 8 4 2 4
+int FindMinInArray(int[] array)
+{
+	int min = array[0];
+	int minIndex = 0;
+	for(int i = 1; i < array.Length; i++)
+	{
+		if (array[i] < min)
+		{
+			min = array[i];
+			minIndex = i;
+		}
+	}
+	return minIndex;
+}
 
-// 5 2 6 7
+int[,] myNewArray = CreateRandom2dArray(3, 5, 0, 3);
+Show2dArray(myNewArray);
+int[] sumInRowsArray = FindSumInRows(myNewArray);
+PrintArray(sumInRowsArray);
+Console.WriteLine(FindMinInArray(sumInRowsArray));
 
-// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+
+
+
+
+
+
 
 // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
 // Например, даны 2 матрицы:
