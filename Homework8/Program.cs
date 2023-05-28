@@ -1,23 +1,23 @@
 ﻿int[,] CreateRandom2dArray(int rows, int columns, int minValue, int maxValue)
 {
-	int[,] array = new int[rows, columns];
-	
-	for(int i = 0; i < rows; i++)
-		for(int j = 0; j < columns; j++)
-			array[i,j] = new Random().Next(minValue, maxValue + 1);
-	
-	return array;
+  int[,] array = new int[rows, columns];
+
+  for (int i = 0; i < rows; i++)
+    for (int j = 0; j < columns; j++)
+      array[i, j] = new Random().Next(minValue, maxValue + 1);
+
+  return array;
 }
 
 void Show2dArray(int[,] array)
 {
-	for(int i = 0; i < array.GetLength(0); i++)
-	{
-		for(int j = 0; j < array.GetLength(1); j++)
-			Console.Write(array[i,j] + " ");
-		Console.WriteLine();
-	}
-	Console.WriteLine();
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    for (int j = 0; j < array.GetLength(1); j++)
+      Console.Write(array[i, j] + " ");
+    Console.WriteLine();
+  }
+  Console.WriteLine();
 }
 
 void PrintArray(int[] array)
@@ -137,6 +137,32 @@ Console.WriteLine(FindMinInArray(sumInRowsArray));
 // Результирующая матрица будет:
 // 18 20
 // 15 18
+
+int[,] multiplyTwoMatrixes(int[,] A, int[,] B)
+{
+  int M = A.GetLength(0);
+  int N = B.GetLength(1);
+  int K = A.GetLength(1);
+  int[,] C = new int[M, N];
+  for (int i = 0; i < M; i++)
+  {
+    for (int j = 0; j < N; j++)
+    {
+      for (int k = 0; k < K; k++)
+        C[i, j] += A[i, k] * B[k, j];
+    }
+  }
+  return C;
+}
+
+int[,] firstMatrix = CreateRandom2dArray(3, 3, 0, 9);
+Show2dArray(firstMatrix);
+int[,] secondMatrix = CreateRandom2dArray(3, 3, 0, 9);
+Show2dArray(secondMatrix);
+int[,] resultMatrix = multiplyTwoMatrixes(firstMatrix, secondMatrix);
+Show2dArray(resultMatrix);
+
+
 
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
